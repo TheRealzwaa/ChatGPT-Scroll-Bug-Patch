@@ -10,6 +10,11 @@
             text-align: center;
             padding: 2rem;
         }
+        .code-container {
+            position: relative;
+            display: inline-block;
+            text-align: left;
+        }
         code {
             display: block;
             background-color: #f4f4f4;
@@ -17,15 +22,42 @@
             border-radius: 5px;
             overflow-x: auto;
         }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Welcome to My GitHub Page</h1>
     <p>Here’s a JavaScript snippet you can copy:</p>
-    <code>
-        &lt;script&gt;<br>
-        console.log('Hello, GitHub Pages!');<br>
-        &lt;/script&gt;
-    </code>
+    <div class="code-container">
+        <code id="code-snippet">
+            &lt;script&gt;<br>
+            console.log('Hello, GitHub Pages!');<br>
+            &lt;/script&gt;
+        </code>
+        <button class="copy-button" onclick="copyCode()">Copy</button>
+    </div>
+
+    <script>
+        function copyCode() {
+            // Get the text content of the code block
+            const code = document.getElementById('code-snippet').innerText;
+            // Use the Clipboard API to copy it
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+    </script>
 </body>
 </html>
